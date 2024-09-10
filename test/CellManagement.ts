@@ -1,21 +1,7 @@
-import {
-    time,
-    loadFixture,
-} from "@nomicfoundation/hardhat-toolbox/network-helpers";
-import {anyValue} from "@nomicfoundation/hardhat-chai-matchers/withArgs";
-import {expect} from "chai";
-import hre from "hardhat";
+import {loadFixture} from "@nomicfoundation/hardhat-toolbox/network-helpers";
+import {deployCellManagementFixture} from "./tools";
 
 describe("CellManagement", function () {
-    // We define a fixture to reuse the same setup in every test.
-    // We use loadFixture to run this setup once, snapshot that state,
-    // and reset Hardhat Network to that snapshot in every test.
-    async function deployCellManagementFixture() {
-        const [player1, player2, player3, player4, player5] = await hre.ethers.getSigners();
-        const MainGame = await hre.ethers.getContractFactory("MainGame");
-        const game = await MainGame.deploy(2);
-        return {game, player1, player2, player3, player4, player5}
-    }
 
     describe("Deployment", function () {
 

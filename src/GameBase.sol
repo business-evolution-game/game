@@ -3,6 +3,13 @@ pragma solidity ^0.8.24;
 
 abstract contract GameBase {
 
+    //Events
+    event GameStarted();
+    event WaitingForPlayerAction(address indexed player);
+
+    //Custom errors
+    error WaitingForAnotherPlayerActionError(address currentPlayer, address senderPlayer);
+
     enum GameStatus {REGISTRATION, STARTED, FINISHED, INTERRUPTED}
     GameStatus public status;
 
@@ -20,7 +27,7 @@ abstract contract GameBase {
 
     struct Player {
         address addr;
-        uint256 balance;
+        int256 balance;
         Position position;
         bool exists;
     }
@@ -28,8 +35,6 @@ abstract contract GameBase {
     Cell[60] public cells;
     mapping(Position=>uint8) cellIndexes; //mapping position to cell index in the cells array
 
-
-    uint8 public totalSteps = 34;
     bool public gameStarted = false;
     uint8 public currentPlayerIndex = 0; // Track whose turn it is
 
@@ -47,22 +52,39 @@ abstract contract GameBase {
         require(status==GameStatus.STARTED, "This function can be executed only when the game id started.");
         _;
     }
-
     modifier onlyPlayer() {
         require(players[msg.sender].exists, "Only a registered player can execute this function.");
         _;
     }
-
-    modifier onlyActivePlayer() {
-        require(playerAddresses[currentPlayerIndex]==msg.sender, "Only active player can execute this function.");
+    modifier onlyActivePlayer(){
+        if(msg.sender!=playerAddresses[currentPlayerIndex]){
+            revert WaitingForAnotherPlayerActionError(playerAddresses[currentPlayerIndex], msg.sender);
+        }
         _;
+    }
+
+    function createPositionValue(uint8 steps, uint8 branch) public pure returns(Position){
+        require(steps < 64, "Steps must fit in 6 bits");
+        require(branch <= 3, "Branch must be 0 to 3");
+
+        uint8 encodedValue = (branch << 6) | steps;
+        return Position.wrap(encodedValue);
+    }
+    function getPlayerStep(Player memory player) public returns(uint8){
+        return Position.unwrap(player.position) & 0x3F;
     }
 
     function getCurrentPlayer() internal view virtual returns(Player memory);
 
-
-    // Utility functions (e.g., for dice roll simulation)
-    function rollDice() public view returns (uint8) {
-        return uint8((block.timestamp + block.prevrandao) % 6 + 1);
+    function startGame() public{
+        status=GameStatus.STARTED;
+        emit GameStarted();
+        setupNextPlayer(0);
     }
+
+    function setupNextPlayer(uint8 playerIndex) public virtual{
+        emit WaitingForPlayerAction(playerAddresses[playerIndex]);
+        currentPlayerIndex=playerIndex;
+    }
+
 }

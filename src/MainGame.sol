@@ -9,7 +9,7 @@ contract MainGame is GameMechanics{
 
     uint8 public playerCount;
 
-    constructor(uint8 _playerCount){
+    constructor(RollDiceI _rollDice, uint8 _playerCount) GameMechanics(_rollDice){
         require(_playerCount<5 && _playerCount>1, "One board require 2 to 4 players.");
         playerCount=_playerCount;
         addPlayer();
@@ -19,7 +19,7 @@ contract MainGame is GameMechanics{
         require(status==GameStatus.REGISTRATION, "The game is already started.");
         addPlayer();
         if(playerAddresses.length==playerCount){
-            status=GameStatus.STARTED;
+            startGame();
         }
     }
 
