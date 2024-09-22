@@ -102,7 +102,7 @@ abstract contract CellManagement is GameBase {
     }
 
     // Buy property function
-    function buyBusiness() external onlyActivePlayer onlyStartedGame{
+    function buyBusiness() external onlyStartedGame onlyPlayer onlyActivePlayer{
         Player memory player = players[msg.sender];
         Cell storage cell = cells[cellIndexes[player.position]];
 

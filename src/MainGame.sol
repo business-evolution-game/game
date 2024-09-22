@@ -17,6 +17,8 @@ contract MainGame is GameMechanics{
 
     function join() external{
         require(status==GameStatus.REGISTRATION, "The game is already started.");
+        require(players[msg.sender].addr == address(0), "You are already joined");
+
         addPlayer();
         if(playerAddresses.length==playerCount){
             startGame();
@@ -25,7 +27,7 @@ contract MainGame is GameMechanics{
 
     function addPlayer() internal{
         playerAddresses.push(msg.sender);
-            players[msg.sender] = Player({
+        players[msg.sender] = Player({
             addr:msg.sender,
             balance:100000,
             position:Position.wrap(0),

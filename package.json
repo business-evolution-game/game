@@ -5,8 +5,9 @@
   "main": "index.js",
   "modules": true,
   "scripts": {
-    "test": "npx hardhat test",
-    "compile": "npx hardhat compile"
+    "test": "npx hardhat test $(find test -name \"*.test.ts\")",
+    "compile": "npx hardhat compile",
+    "coverage": "npx hardhat coverage"
   },
   "keywords": [],
   "author": "",

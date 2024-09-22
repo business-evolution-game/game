@@ -42,7 +42,7 @@ contract GameMechanics is CellManagement, CustomAgreements {
 
 
     function setupNextPlayer() public{
-        currentPlayerIndex = (currentPlayerIndex + 1) % uint8(playerAddresses.length-1);
+        currentPlayerIndex = (currentPlayerIndex + 1) % uint8(playerAddresses.length);
         super.setupNextPlayer(currentPlayerIndex);
     }
 
@@ -51,8 +51,7 @@ contract GameMechanics is CellManagement, CustomAgreements {
     }
 
     // Take player turn and handle movement
-    function takeTurn() external onlyPlayer onlyActivePlayer {
-        require( status==GameStatus.STARTED, "Game has not started yet.");
+    function takeTurn() external onlyStartedGame onlyPlayer onlyActivePlayer {
 
         currentDiceValue = rollDice.rollDice();
         uint8 moveFor = getCurrentDicesSum();
@@ -64,22 +63,59 @@ contract GameMechanics is CellManagement, CustomAgreements {
             emit ChangedPlayerStatus(msg.sender, 'CHOOSING_BRANCH', abi.encode(newPlayerStep, branches));
             return;
         }
+        movePlayer(newPlayerStep, 0);
+    }
 
-        Position newPosition = createPositionValue(newPlayerStep, 1);
+    function chooseBranch(uint8 branch) external onlyStartedGame onlyPlayer onlyActivePlayer {
+        require(currentPlayerAction==CurrentPlayerAction.CHOOSING_BRANCH, "You are not on the choosing branch state");
+
+        uint8 moveFor = getCurrentDicesSum();
+        uint8 newPlayerStep = getPlayerStep(players[msg.sender])+moveFor;
+        uint8 branches = getStepBranchesCount(newPlayerStep);
+
+        require(branches>=branch, "You truing move to branch that out of the available branches");
+        movePlayer(newPlayerStep, branch);
+    }
+
+    function movePlayer(uint8 step, uint8 branch) internal{
+        Position newPosition = createPositionValue(step, branch);
         players[msg.sender].position = newPosition;
         emit PlayerMoved(msg.sender, Position.unwrap(newPosition));
 
-
-
-        uint paymentValue = getPaymentValue(msg.sender, newPosition);
-        if(paymentValue>0){
-            currentPlayerAction=CurrentPlayerAction.WAITING_PAYMENT;
-            console.log("should pay ",paymentValue);
-            emit ChangedPlayerStatus(msg.sender, 'WAITING_PAYMENT', abi.encode(paymentValue));
-            return;
+        Cell memory cell = cells[cellIndexes[newPosition]];
+        if(cell.cellType==CellType.BUSINESS){
+            if(cell.owner!=address(0)){
+                uint paymentValue = getPaymentValue(msg.sender, newPosition);
+                if(paymentValue>0){
+                    currentPlayerAction=CurrentPlayerAction.WAITING_PAYMENT;
+                    console.log("should pay ",paymentValue);
+                    emit ChangedPlayerStatus(msg.sender, 'WAITING_PAYMENT', abi.encode(paymentValue));
+                    return;
+                }
+            }else{
+                //TODO: bye the business
+            }
+        }else{
+            //TODO: processing another cell types
         }
         currentPlayerAction=CurrentPlayerAction.ANY_USER_ACTION;
         emit ChangedPlayerStatus(msg.sender, 'ANY_USER_ACTION', "");
+    }
+
+    function nextPlayer() external onlyStartedGame onlyPlayer onlyActivePlayer{
+        //todo: check current player status
+        setupNextPlayer();
+    }
+
+    function makePayment() external onlyStartedGame onlyPlayer onlyActivePlayer{
+        require(currentPlayerAction==CurrentPlayerAction.WAITING_PAYMENT, "You are not on the waiting for payment state");
+
+        uint paymentValue = getPaymentValue(msg.sender, players[msg.sender].position);
+        require(players[msg.sender].balance > int256(paymentValue), "Your balance is too low.");
+
+        //TODO: check the type of payment (another player or bank)
+        //TODO: change the balance
+
     }
 
 

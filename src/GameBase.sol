@@ -33,7 +33,7 @@ abstract contract GameBase {
     }
 
     Cell[60] public cells;
-    mapping(Position=>uint8) cellIndexes; //mapping position to cell index in the cells array
+    mapping(Position=>uint8) public cellIndexes; //mapping position to cell index in the cells array
 
     bool public gameStarted = false;
     uint8 public currentPlayerIndex = 0; // Track whose turn it is
@@ -49,7 +49,7 @@ abstract contract GameBase {
 
 
     modifier onlyStartedGame() {
-        require(status==GameStatus.STARTED, "This function can be executed only when the game id started.");
+        require(status==GameStatus.STARTED, "Game has not started yet.");
         _;
     }
     modifier onlyPlayer() {
