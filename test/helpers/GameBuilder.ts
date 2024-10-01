@@ -9,7 +9,7 @@ export default class GameBuilder {
 
     private readonly playerCount:number;
 
-    private constructor(playerCount:number = 2) {
+    constructor(playerCount:number = 2) {
         this.playerCount=playerCount;
         this.actions=[];
     }

@@ -37,6 +37,8 @@ abstract contract GameBase {
 
     bool public gameStarted = false;
     uint8 public currentPlayerIndex = 0; // Track whose turn it is
+    enum CurrentPlayerAction {WAITING_FOR_MOVE,ANY_USER_ACTION, CHOOSING_BRANCH, WAITING_PAYMENT, AUCTION}
+    CurrentPlayerAction public currentPlayerAction;
 
     // Mappings
     mapping(address => Player) public players;
@@ -45,6 +47,7 @@ abstract contract GameBase {
 
     constructor(){
         status = GameStatus.REGISTRATION;
+        currentPlayerAction = CurrentPlayerAction.WAITING_FOR_MOVE;
     }
 
 

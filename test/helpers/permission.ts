@@ -2,7 +2,7 @@ import {loadFixture} from "@nomicfoundation/hardhat-toolbox/network-helpers";
 import {newTwoPlayerGameFixture, notStartedGameFixture} from "./tools";
 import {expect} from "chai";
 
-export function testPlayerPermissionForFunction(stack:string, functionName:string, ...args) {
+export function testPlayerPermissionForFunction(stack:string|undefined, functionName:string, ...args) {
     describe(`Check permission for function: ${functionName}`,async  ()=>{
         afterEach(function () {
             if (this.currentTest?.state === 'failed') {

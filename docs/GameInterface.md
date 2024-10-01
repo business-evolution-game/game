@@ -14,6 +14,7 @@ event PlayerMoved(address player, uint8 newPosition);
 *   ANY_USER_ACTION -
 *   CHOOSING_BRANCH - [newPlayerStep:uint8, branches:uint8]
 *   WAITING_PAYMENT - [paymentValue:uint]
+*   AUCTION - [position:uint8]
 */
 event ChangedPlayerStatus(address player, string status, bytes payload);
     

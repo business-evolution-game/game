@@ -1,13 +1,13 @@
 import {loadFixture} from "@nomicfoundation/hardhat-toolbox/network-helpers";
 import {expect} from "chai";
-import {createPosition, newTwoPlayerGameFixture} from "./helpers/tools";
+import {createPosition, getGenericValueAssertion, newTwoPlayerGameFixture} from "./helpers/tools";
 import {anyValue} from "@nomicfoundation/hardhat-chai-matchers/withArgs";
 import {testPlayerPermissionForFunction} from "./helpers/permission";
 import GameBuilder from "./helpers/GameBuilder";
 import Game from "./helpers/Game";
 
 
-describe("GameMechanics", function () {
+describe("GameMechanics", async function () {
     const moveTo5Fixture = async function() {
         const gh:Game = await new GameBuilder(2)
             .start(0)
@@ -37,7 +37,7 @@ describe("GameMechanics", function () {
         it("Should emit event ChangedPlayerStatus(CHOOSING_BRANCH)", async function () {
             let {gameContract, actors} = await loadFixture(newTwoPlayerGameFixture);
             await expect(await gameContract.takeTurn()).to.emit(gameContract, "ChangedPlayerStatus")
-                .withGenericArgs("ChangedPlayerStatus",[actors[0].address, 'CHOOSING_BRANCH'] , ['uint8', 'uint8'], [2,3]);
+                .withArgs(actors[0].address, 'CHOOSING_BRANCH', getGenericValueAssertion(['uint8', BigInt(2)],['uint8', BigInt(3)]));
             await expect(await gameContract.currentPlayerAction()).to.be.equal(2);
         });
 
@@ -102,7 +102,7 @@ describe("GameMechanics", function () {
 
             await gameHelper.gameContract.takeTurn();
             await expect(await gameHelper.gameContract.chooseBranch(2)).to.emit(gameHelper.gameContract, "ChangedPlayerStatus")
-                .withGenericArgs("ChangedPlayerStatus",[gameHelper.actors[1].address, 'WAITING_PAYMENT'] , ['uint'], [500]);
+                .withArgs(gameHelper.actors[1].address, 'WAITING_PAYMENT', getGenericValueAssertion(['uint', BigInt(500)]));
 
             await expect(await gameHelper.gameContract.currentPlayerAction()).to.be.equal(3);
         });
@@ -114,6 +114,23 @@ describe("GameMechanics", function () {
             await expect((await gameContract.players(actors[0].address))[2]).to.be.equal(createPosition(2, 2));
         });
     })
+
+    describe("When player moved to not owned Business cell", async ()=>{
+        describe('on the multiple branch position',  async ()=>{
+
+            it("The player status should be changed to AUCTION ", async function () {
+                let {gameContract, actors} = await loadFixture(newTwoPlayerGameFixture);
+
+                const newPosition = createPosition(2, 2);
+                await gameContract.takeTurn();
+
+                await expect(await gameContract.chooseBranch(2)).to.emit(gameContract, "ChangedPlayerStatus")
+                    .withArgs(actors[0].address, 'AUCTION', getGenericValueAssertion(['uint8', BigInt(newPosition)]));
+                await expect(await gameContract.currentPlayerAction()).to.be.equal(4);
+            });
+
+        })
+    });
 
     describe('makePayment',  async ()=>{
 

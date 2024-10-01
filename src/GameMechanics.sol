@@ -18,6 +18,7 @@ contract GameMechanics is CellManagement, CustomAgreements {
     *   ANY_USER_ACTION -
     *   CHOOSING_BRANCH - [newPlayerStep:uint8, branches:uint8]
     *   WAITING_PAYMENT - [paymentValue:uint]
+    *   AUCTION - [position:uint8]
     */
     event ChangedPlayerStatus(address player, string status, bytes payload);
 
@@ -29,15 +30,13 @@ contract GameMechanics is CellManagement, CustomAgreements {
     RollDiceI rollDice;
 
     //Game state
-    enum CurrentPlayerAction {WAITING_FOR_MOVE,ANY_USER_ACTION, CHOOSING_BRANCH, WAITING_PAYMENT}
 
 
     uint8 currentDiceValue;
-    CurrentPlayerAction public currentPlayerAction;
+
 
     constructor(RollDiceI _rollDice) CellManagement() CustomAgreements(){
         rollDice = _rollDice;
-        currentPlayerAction = CurrentPlayerAction.WAITING_FOR_MOVE;
     }
 
 
@@ -93,13 +92,15 @@ contract GameMechanics is CellManagement, CustomAgreements {
                     return;
                 }
             }else{
-                //TODO: bye the business
+                currentPlayerAction = CurrentPlayerAction.AUCTION;
+                emit ChangedPlayerStatus(msg.sender, 'AUCTION', abi.encode(newPosition));
             }
         }else{
             //TODO: processing another cell types
+
+            currentPlayerAction=CurrentPlayerAction.ANY_USER_ACTION;
+            emit ChangedPlayerStatus(msg.sender, 'ANY_USER_ACTION', "");
         }
-        currentPlayerAction=CurrentPlayerAction.ANY_USER_ACTION;
-        emit ChangedPlayerStatus(msg.sender, 'ANY_USER_ACTION', "");
     }
 
     function nextPlayer() external onlyStartedGame onlyPlayer onlyActivePlayer{

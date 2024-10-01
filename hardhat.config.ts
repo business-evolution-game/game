@@ -1,6 +1,5 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
-require('./mocha.config');
 
 const config: HardhatUserConfig = {
   solidity: "0.8.24",
@@ -12,3 +11,4 @@ const config: HardhatUserConfig = {
 };
 
 export default config;
+

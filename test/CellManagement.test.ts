@@ -37,7 +37,7 @@ describe("CellManagement", function () {
             const position = createPosition(2,2);
             await expect(await gh.gameContract.buyBusiness()).to.emit(gh.gameContract, "BusinessPurchased")
                 .withArgs(gh.actors[0].address, position);
-            const cellInfo = await gh.gameContract.cells(await gh.gameContract.cellIndexes(position as any) as any);
+            const cellInfo = await gh.gameContract.cells(await gh.gameContract.cellIndexes(position));
             await expect(cellInfo[5]).to.be.equal(gh.actors[0].address);
         });
 

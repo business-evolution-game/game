@@ -103,6 +103,7 @@ abstract contract CellManagement is GameBase {
 
     // Buy property function
     function buyBusiness() external onlyStartedGame onlyPlayer onlyActivePlayer{
+        require(currentPlayerAction==CurrentPlayerAction.AUCTION, "You are not on the auction state");
         Player memory player = players[msg.sender];
         Cell storage cell = cells[cellIndexes[player.position]];
 
