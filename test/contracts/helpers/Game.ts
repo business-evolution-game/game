@@ -1,9 +1,7 @@
-import {MainGame, RollDiceMock} from "../../typechain-types";
+import {MainGame, RollDiceMock} from "../../../typechain-types";
 import {HardhatEthersSigner} from "@nomicfoundation/hardhat-ethers/signers";
 
 export default class Game{
-    public readonly rollDiceContract:RollDiceMock;
-    public readonly actors;
 
     constructor(
         public gameContract:MainGame,

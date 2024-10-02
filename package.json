@@ -5,6 +5,7 @@
   "main": "index.js",
   "modules": true,
   "scripts": {
+    "dev": "vite",
     "test": "npx hardhat test $(find test -name \"*.test.ts\")",
     "compile": "npx hardhat compile",
     "coverage": "npx hardhat coverage"
@@ -25,14 +26,28 @@
     "@types/chai": "^4.3.19",
     "@types/mocha": "^10.0.7",
     "@types/node": "^22.5.3",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "@types/three": "^0.169.0",
     "chai": "^4.5.0",
     "ethers": "^6.13.2",
     "hardhat": "^2.22.10",
     "hardhat-gas-reporter": "^1.0.10",
     "solidity-coverage": "^0.8.13",
+    "tailwind": "^4.0.0",
     "ts-mocha": "^10.0.0",
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vite": "^5.4.8"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.114.0",
+    "@react-three/fiber": "^8.17.9",
+    "framer-motion-3d": "^11.9.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.169.0",
+    "three-stdlib": "^2.33.0"
   }
 }

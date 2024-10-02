@@ -1,6 +1,6 @@
 import hre from "hardhat";
 import Game from "./Game";
-import {MainGame, RollDiceMock} from "../../typechain-types";
+import {MainGame, RollDiceMock} from "../../../typechain-types";
 
 
 export default class GameBuilder {
