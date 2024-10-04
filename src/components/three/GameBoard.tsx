@@ -47,8 +47,8 @@ const GameBoard: React.FC = () => {
         controller.setPlayers([
             new Player("Yurii", createPosition(2, 1)),
             new Player("Bogdan", createPosition(2, 1)),
-            new Player("Yulia", createPosition(2, 3)),
-            new Player("Vlad", createPosition(7, 1))
+            new Player("Yulia", createPosition(2, 1)),
+            new Player("Vlad", createPosition(2, 2))
         ]);
 
     }, [controller]);

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import { motion } from 'framer-motion-3d';
-import { useGLTF } from '@react-three/drei';
 import {useResources} from "../general/ResourceManager";
 
 const rotationMap = [
@@ -12,18 +11,6 @@ const rotationMap = [
     {x:-Math.PI/2,y: Math.PI/2, z:0}, //6
 ]
 
-type animationProps = {
-    init:{
-        x:number,
-        y:number,
-        z:number,
-    }
-    target:{
-        rotateX:number,
-        rotateY:number,
-        rotateZ:number,
-    }
-}
 /**
  * @param {number} value1 - 0-5
  * @param {number} value2 - 0-5

@@ -4,8 +4,9 @@ import { useFrame } from '@react-three/fiber';
 import { clone } from 'three/examples/jsm/utils/SkeletonUtils';
 import * as THREE from 'three';
 import {useResources} from "../general/ResourceManager";
+import {Vector3} from "three";
 
-export default function Player({color="#ffffff", path = [[0, 0, 0]], speed = 1, ...props }) {
+export default function Player({color="#ffffff", path = [new Vector3(0, 0, 0)], speed = 1, ...props }) {
     const group = useRef();
     const { models } = useResources();
 
@@ -58,9 +59,9 @@ export default function Player({color="#ffffff", path = [[0, 0, 0]], speed = 1, 
     }, [clonedScene]);
 
     // Movement logic
-    const currentIndex = useRef(0);
-    const currentPosition = useRef(new THREE.Vector3(...path[0]));
-    const targetPosition = useRef(new THREE.Vector3(...path[1] || path[0]));
+    const currentIndex = useRef<number>(0);
+    const currentPosition = useRef<Vector3>(path[0].clone());
+    const targetPosition = useRef<Vector3>((path[1] || path[0]).clone());
     const direction = useRef(
         new THREE.Vector3().subVectors(targetPosition.current, currentPosition.current).normalize()
     );
@@ -82,7 +83,7 @@ export default function Player({color="#ffffff", path = [[0, 0, 0]], speed = 1, 
                 currentIndex.current += 1;
                 if (currentIndex.current < path.length - 1) {
                     currentPosition.current.copy(targetPosition.current);
-                    targetPosition.current.set(...path[currentIndex.current + 1]);
+                    targetPosition.current.set(...path[currentIndex.current + 1].toArray());
                     direction.current
                         .subVectors(targetPosition.current, currentPosition.current)
                         .normalize();
