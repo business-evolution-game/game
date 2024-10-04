@@ -13,7 +13,7 @@ export default function GameNameLabel() {
                 text="BUSINESS"
                 position={[-90, 0, -5]}
                 rotation={[-Math.PI/2, 0, 0]}
-                fontUrl="/fonts/RubikGlitchRegular.json"
+                fontName="RubikGlitch"
                 size={25}
                 color="#606060"
             />
@@ -21,7 +21,7 @@ export default function GameNameLabel() {
                 text="EVOLUTION"
                 position={[-100, 0, 25]}
                 rotation={[-Math.PI/2, 0, 0]}
-                fontUrl="/fonts/RubikGlitchRegular.json"
+                fontName="RubikGlitch"
                 size={25}
                 color="#606060"
             />

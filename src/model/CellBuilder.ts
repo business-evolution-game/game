@@ -63,12 +63,13 @@ function createCellMap(): cellMap {
     return res;
 }
 
-export function createCells(): Array<Cell> {
+export function createCells(): {cells:Array<Cell>, positionMap:Map<number, Cell>} {
     const cellMap = createCellMap();
-
+    const positionMap = new Map<number, Cell>();
     let cells: Array<Cell> = [];
     for (const cellPosition in cellMap) {
         cells.push(new Cell(Number(cellPosition), cellMap[cellPosition].boardPosition));
+        positionMap.set(Number(cellPosition), cells[cells.length-1]);
     }
-    return cells;
+    return {cells, positionMap};
 }

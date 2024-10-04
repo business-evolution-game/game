@@ -1,7 +1,10 @@
 import React, {useMemo} from 'react';
 import {extend, ReactThreeFiber, useLoader} from '@react-three/fiber';
 import {FontLoader} from 'three/examples/jsm/loaders/FontLoader';
-import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry';;
+import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry';
+import {useResources} from "../general/ResourceManager";
+
+;
 
 declare global {
     namespace JSX {
@@ -18,7 +21,7 @@ interface Text3DComponentProps {
     text: string;
     position?: [number, number, number];
     rotation?: [number, number, number];
-    fontUrl: string;
+    fontName: string;
     size?: number;
     depth?: number;
     color?: string;
@@ -28,12 +31,12 @@ const Text3DComponent: React.FC<Text3DComponentProps> = ({
                                                              text,
                                                              position = [0, 0, 0],
                                                              rotation = [0, 0, 0],
-                                                             fontUrl,
+                                                             fontName,
                                                              size = 1,
                                                              depth = 0.2,
                                                              color = '#ffffff',
                                                          }) => {
-    const font = useLoader(FontLoader, fontUrl);
+    const font = useResources().fonts[fontName];
 
     const textOptions = useMemo(() => ({
         font: font,

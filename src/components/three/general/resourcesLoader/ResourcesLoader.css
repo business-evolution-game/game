@@ -1,0 +1,45 @@
+/* ProgressBar.css */
+.svg-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(31, 41, 55, 0.8);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.progress-circle {
+    transition: stroke-dashoffset 0.5s ease;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+
+.loading-text, .loading-log {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    font-size: 14px;
+    margin-top: 15px;
+    overflow-y: scroll;
+}
+
+
+.spinner {
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #3b82f6;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
