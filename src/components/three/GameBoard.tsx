@@ -1,4 +1,4 @@
-import React, {Suspense, useCallback, useEffect, useMemo} from 'react';
+import React, {Suspense, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {Canvas} from '@react-three/fiber';
 import {OrbitControls} from '@react-three/drei';
 import {Board} from './Board';
@@ -14,7 +14,6 @@ import useCellManager from "./hooks/useCellManager";
 type BoardControllerEventHandlers = {
     movePlayer?:((playerId: string, toPosition:number ) => Promise<void>) | null,
     rollDices?:((dice1: number, dice2: number) => Promise<void>) | null,
-    playersUpdated?:((players:Array<Player>) => Promise<void>) | null,
 };
 
 export class BoardController {
@@ -56,10 +55,6 @@ export class BoardController {
         if (listener && player) {
             await listener(id, position);
             player.position = position;
-            const listener2 = this.listeners.playersUpdated;
-            if (listener2) {
-                await listener2([...this.players]);
-            }
         }
 
     }
@@ -71,24 +66,36 @@ const GameBoard: React.FC = () => {
     const controller = useMemo(() => new BoardController(), [null]);
     useEffect(() => {
         controller.setPlayers([
-            new Player("Yurii", createPosition(32)),
-            new Player("Bogdan", createPosition(0)),
-            new Player("Yulia", createPosition(0)),
-            new Player("Vlad", createPosition(0))
+            new Player("Yurii", createPosition(18)),
+            new Player("Bogdan", createPosition(18)),
+            new Player("Yulia", createPosition(18)),
+            new Player("Vlad", createPosition(18)),
         ]);
 
     }, [controller]);
 
-    const handler = useCallback(async () => {
+    const movingPlayersId = useRef<Array<string>>([]);
+
+    const onBoardClickHandler = useCallback(async () => {
         try {
-            const dice1 = Math.ceil(Math.random() * 6) - 1;
-            const dice2 = Math.ceil(Math.random() * 6) - 1;
-            console.log("Dice value", dice1 + 1, dice2 + 1);
-            const newPositionStep = (dice1+1+(controller.getPlayers()[0].position&0x3F))%35;
-            const steps = cellManager.getCellCountForStep(newPositionStep);
-            await controller.rollDices(dice1, dice2);
-            const newPosition = createPosition(newPositionStep, steps == 1 ? 0 : 2);
-            await controller.movePlayer(controller.getPlayers()[0].id, newPosition);
+            const player = controller.getPlayers().find(p=>!(movingPlayersId.current.includes((p.id))));
+            if(player) {
+                movingPlayersId.current = [...movingPlayersId.current, player.id];
+                console.log(`player ${player.id} ig gonna move`, movingPlayersId);
+
+                const dice1 = Math.ceil(Math.random() * 6) - 1;
+                const dice2 = Math.ceil(Math.random() * 6) - 1;
+                console.log("Dice value", dice1 + 1, dice2 + 1);
+                const newPositionStep = (dice1 + 1 + (player.position & 0x3F)) % 35;
+                const steps = cellManager.getCellCountForStep(newPositionStep);
+                const newPosition = createPosition(newPositionStep, steps == 1 ? 0 : 2);
+
+                await controller.rollDices(dice1, dice2);
+                await controller.movePlayer(player.id, newPosition);
+                movingPlayersId.current = movingPlayersId.current.filter(id=>id!=player.id);
+            }else {
+                console.log("all players are moving");
+            }
         }catch (e) {
             console.error(e);
         }
@@ -103,7 +110,7 @@ const GameBoard: React.FC = () => {
                 <ResourceProvider>
                     <ambientLight intensity={0.75}/>
                     <Light/>
-                    <Board controller={controller} onClick={handler}/>
+                    <Board controller={controller} onClick={onBoardClickHandler}/>
                     <OrbitControls enableDamping dampingFactor={0.05} minDistance={300} maxDistance={1000}/>
                 </ResourceProvider>
             </Suspense>

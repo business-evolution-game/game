@@ -15,7 +15,7 @@ export const CellComponent = forwardRef<THREE.Mesh, CellProps>(({cell}, ref) => 
     let start=0;
     let end=Math.PI*2;
     let radius = 20;
-    const angleIndex = [0,139, 17, 28].findIndex((v)=>v==cell.position);
+    const angleIndex = [0,75, 17, 28].findIndex((v)=>v==cell.position);
     if(angleIndex>-1){
         start = -(Math.PI/2)*(angleIndex-1);
         end = -Math.PI/2;
@@ -30,7 +30,7 @@ export const CellComponent = forwardRef<THREE.Mesh, CellProps>(({cell}, ref) => 
             receiveShadow
             onPointerOver={(event) => {
                 if (event.object.type!="Points") {
-                    console.log(cell.position)
+                    console.log(cell.position, cell.position&0x3F, (cell.position&0b11000000)>>6)
                     setHovering(true);
                 }
             }}

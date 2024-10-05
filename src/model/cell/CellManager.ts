@@ -41,8 +41,8 @@ export default class CellManager {
         this.addCategoryToCellMap(9, 192 - 55 * 0, -191, 67);
         this.addPositionToCellMap(createPosition(10), new Vector2(139 + 55 * 2, -153));
 
-        this.addPositionToCellMap(createPosition(11, 1), new Vector2(293, -99));
-        this.addPositionToCellMap(createPosition(11, 2), new Vector2(330, -220));
+        this.addPositionToCellMap(createPosition(11, 1), new Vector2(330, -220));
+        this.addPositionToCellMap(createPosition(11, 2), new Vector2(293, -99));
         this.addPositionToCellMap(createPosition(12), new Vector2(293, -29));
         this.addPositionToCellMap(createPosition(13), new Vector2(238, -29));
 

@@ -18,38 +18,39 @@ type PLayerComponentProps = {
     onAnimationFinish:(playerId: string) => void
 }
 const Player:React.FC<PLayerComponentProps> = ({playerId, isMoving, path, speed, onAnimationFinish, position})=> {
+    console.log("Player component rendered for player: ", playerId);
+    //ISSUE: try to reproduce issue (sometimes a player became not visible)
+    //ISSUE: try to reproduce issue (sometimes a player can move infinitive on the same position because didn't finish a movement but animation is finished)
+    //ISSUE: when user switch to a not game page a player animation became infinitive (the moving end event are not emitted))
     const group = useRef<ReferenceNode<typeof group>>();
     const {models} = useResources();
 
     const clonedScene = useMemo(() => clone(models.player.scene), [models.player.scene]);
     const {actions} = useAnimations(models.player.animations, group);
 
-    const currentAction = useRef<string>('Rig|Eyes blinking');
+    const currentAction = useRef<string>('');
     const switchAnimation = (newActionName: string) => {
-
-        if (currentAction.current !== newActionName) {
-            const prevAction = actions[currentAction.current];
-            const newAction = actions[newActionName];
-            group.current.lookAt(new Vector3());
-            if (newAction) {
-                newAction.reset().fadeIn(0.5).play();
-                if (prevAction) {
-                    prevAction.fadeOut(0.5);
-                }
-                currentAction.current = newActionName;
+        const prevAction = actions[currentAction.current];
+        const newAction = actions[newActionName];
+        group.current.lookAt(new Vector3());
+        if (newAction) {
+            newAction.reset().fadeIn(0.5).play();
+            if (prevAction) {
+                prevAction.fadeOut(0.5);
             }
+            currentAction.current = newActionName;
         }
     };
 
     useEffect(() => {
         // Play the idle animation initially
-        Object.values(actions).forEach((action) => action?.stopFading());
-        switchAnimation('Rig|Eyes blinking');
-
+        // Object.values(actions).forEach((action) => action?.stopFading());
+        switchAnimation('Rig|idle');
+        group.current.lookAt(new Vector3());
         return () => {
             Object.values(actions).forEach((action) => action?.stop());
         };
-    }, [actions]);
+    }, [actions, group]);
 
     // Optional: Modify materials if needed
     useEffect(() => {
@@ -114,7 +115,7 @@ const Player:React.FC<PLayerComponentProps> = ({playerId, isMoving, path, speed,
                 group.current.position.copy(currentPosition.current);
                 group.current.lookAt(targetPosition.current);
             }
-        } else if (isMoving) {
+        } else if (isMoving && currentAction.current !== 'Rig|idle') {
             switchAnimation('Rig|idle');
             onAnimationFinish(playerId);
         }
