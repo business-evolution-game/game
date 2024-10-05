@@ -1,30 +1,36 @@
-import React, { useRef, useEffect, useMemo } from 'react';
-import { useGLTF, useAnimations } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
-import { clone } from 'three/examples/jsm/utils/SkeletonUtils';
+import React, {useEffect, useMemo, useRef} from 'react';
+import {useAnimations} from '@react-three/drei';
+import {useFrame} from '@react-three/fiber';
+import {clone} from 'three/examples/jsm/utils/SkeletonUtils';
 import * as THREE from 'three';
+import {Vector3} from 'three';
 import {useResources} from "../general/ResourceManager";
-import {Vector3} from "three";
+import {ReferenceNode} from "three/src/nodes/Nodes";
+import {generateHexColorFromString} from "../../../tools";
 
-export default function Player({color="#ffffff", path = [new Vector3(0, 0, 0)], speed = 1, ...props }) {
-    const group = useRef();
-    const { models } = useResources();
+type PLayerComponentProps = {
+    playerId:string,
+    position:Vector3,
 
-    // Clone the scene to create a unique instance
+    isMoving:boolean,
+    path:Array<Vector3>,
+    speed:number,
+    onAnimationFinish:(playerId: string) => void
+}
+const Player:React.FC<PLayerComponentProps> = ({playerId, isMoving, path, speed, onAnimationFinish, position})=> {
+    const group = useRef<ReferenceNode<typeof group>>();
+    const {models} = useResources();
+
     const clonedScene = useMemo(() => clone(models.player.scene), [models.player.scene]);
+    const {actions} = useAnimations(models.player.animations, group);
 
-    // Use animations with the cloned scene
-    const { actions } = useAnimations(models.player.animations, group);
+    const currentAction = useRef<string>('Rig|Eyes blinking');
+    const switchAnimation = (newActionName: string) => {
 
-    // Ref to keep track of the current action
-    const currentAction = useRef(null);
-
-    // Helper function to switch animations
-    const switchAnimation = (newActionName) => {
         if (currentAction.current !== newActionName) {
             const prevAction = actions[currentAction.current];
             const newAction = actions[newActionName];
-
+            group.current.lookAt(new Vector3());
             if (newAction) {
                 newAction.reset().fadeIn(0.5).play();
                 if (prevAction) {
@@ -37,11 +43,11 @@ export default function Player({color="#ffffff", path = [new Vector3(0, 0, 0)], 
 
     useEffect(() => {
         // Play the idle animation initially
-        switchAnimation('Rig|idle');
+        Object.values(actions).forEach((action) => action?.stopFading());
+        switchAnimation('Rig|Eyes blinking');
 
         return () => {
-            // Stop all actions on unmount
-            Object.values(actions).forEach((action) => action.stop());
+            Object.values(actions).forEach((action) => action?.stop());
         };
     }, [actions]);
 
@@ -52,22 +58,30 @@ export default function Player({color="#ffffff", path = [new Vector3(0, 0, 0)], 
                 // Clone the material to prevent shared state
                 child.material = child.material.clone();
                 if (child.material.name === 'business_suit_man') {
-                    child.material.color.set(color);
+                    child.material.color.set(generateHexColorFromString(playerId));
                 }
             }
         });
-    }, [clonedScene]);
+    }, [clonedScene, playerId]);
 
     // Movement logic
     const currentIndex = useRef<number>(0);
-    const currentPosition = useRef<Vector3>(path[0].clone());
-    const targetPosition = useRef<Vector3>((path[1] || path[0]).clone());
-    const direction = useRef(
-        new THREE.Vector3().subVectors(targetPosition.current, currentPosition.current).normalize()
-    );
+    const currentPosition = useRef<Vector3>(path[0]);
+    const targetPosition = useRef<Vector3>(path[1] || path[0]);
+    const direction = useRef(new THREE.Vector3().subVectors(targetPosition.current, currentPosition.current).normalize());
+
+    useEffect(() => {
+        currentIndex.current = 0;
+        currentPosition.current = path[0].clone();
+        targetPosition.current = (path[1] || path[0]).clone();
+        direction.current.subVectors(targetPosition.current, currentPosition.current).normalize();
+        if(path.length>1) {
+            switchAnimation('Rig|run');
+        }
+    }, [path]);
+
 
     useFrame((state, delta) => {
-        let isMoving = false;
 
         if (currentIndex.current < path.length - 1) {
             const moveDistance = speed * delta;
@@ -75,8 +89,6 @@ export default function Player({color="#ffffff", path = [new Vector3(0, 0, 0)], 
                 .clone()
                 .add(direction.current.clone().multiplyScalar(moveDistance));
             const distanceToNext = newPosition.distanceTo(targetPosition.current);
-
-            isMoving = true;
 
             if (distanceToNext < 1) {
                 // Reached the target, move to the next target
@@ -93,7 +105,6 @@ export default function Player({color="#ffffff", path = [new Vector3(0, 0, 0)], 
                     if (group.current) {
                         group.current.position.copy(currentPosition.current);
                     }
-                    isMoving = false;
                 }
             } else {
                 currentPosition.current.copy(newPosition);
@@ -101,24 +112,16 @@ export default function Player({color="#ffffff", path = [new Vector3(0, 0, 0)], 
 
             if (group.current) {
                 group.current.position.copy(currentPosition.current);
-                // Rotate the player to face the movement direction
                 group.current.lookAt(targetPosition.current);
             }
-        } else {
-            isMoving = false;
-        }
-
-        // Switch animations based on movement state
-        if (isMoving) {
-            switchAnimation('Rig|run');
-        } else {
+        } else if (isMoving) {
             switchAnimation('Rig|idle');
+            onAnimationFinish(playerId);
         }
     });
 
-    return (
-        <group ref={group} {...props} dispose={null} scale={20}>
-            <primitive object={clonedScene} />
-        </group>
-    );
+    return (<group ref={group} position={position}  dispose={null} scale={20}>
+        <primitive object={clonedScene}/>
+    </group>);
 }
+export default Player;

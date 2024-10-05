@@ -8,13 +8,19 @@ import {createPosition} from "../../tools";
 import {ResourceProvider} from "./general/ResourceManager";
 import {LoadingManagerProvider} from "./general/LoadingManagerContext";
 import ResourcesLoader from "./general/resourcesLoader/ResourcesLoader";
+import useCellManager from "./hooks/useCellManager";
 
-type BoardControllerEventHandlers = (dice1: number, dice2: number) => void;
+
+type BoardControllerEventHandlers = {
+    movePlayer?:((playerId: string, toPosition:number ) => Promise<void>) | null,
+    rollDices?:((dice1: number, dice2: number) => Promise<void>) | null,
+    playersUpdated?:((players:Array<Player>) => Promise<void>) | null,
+};
 
 export class BoardController {
     private players: Array<Player> = [];
 
-    private listeners = new Map<string, BoardControllerEventHandlers>;
+    private listeners = {} as BoardControllerEventHandlers;
 
     constructor() {
         console.log("created controller")
@@ -28,38 +34,64 @@ export class BoardController {
         return this.players;
     }
 
-    rollDices(dice1: number, dice2: number) {
-        const listener = this.listeners.get("rollDices");
+    async rollDices(dice1: number, dice2: number) {
+        const listener = this.listeners.rollDices;
         if (listener) {
-            listener(dice1, dice2);
+            await listener(dice1, dice2);
         }
     }
 
-    useEvent(name: string, listener: BoardControllerEventHandlers) {
-        this.listeners.set(name, listener);
+    useEvent<T extends keyof BoardControllerEventHandlers>(name:T, listener: BoardControllerEventHandlers[T]) {
+        this.listeners[name] = listener;
+
+        return ()=>{
+            this.listeners[name]=null;
+        }
+    }
+
+    async movePlayer(id: string, position: number):Promise<void> {
+
+        const player = this.players.find(player => player.id === id);
+        const listener = this.listeners.movePlayer;
+        if (listener && player) {
+            await listener(id, position);
+            player.position = position;
+            const listener2 = this.listeners.playersUpdated;
+            if (listener2) {
+                await listener2([...this.players]);
+            }
+        }
+
     }
 }
 
 const GameBoard: React.FC = () => {
 
+    const cellManager = useCellManager();
     const controller = useMemo(() => new BoardController(), [null]);
     useEffect(() => {
         controller.setPlayers([
-            new Player("Yurii", createPosition(2, 1)),
-            new Player("Bogdan", createPosition(2, 1)),
-            new Player("Yulia", createPosition(2, 1)),
-            new Player("Vlad", createPosition(2, 2))
+            new Player("Yurii", createPosition(32)),
+            new Player("Bogdan", createPosition(0)),
+            new Player("Yulia", createPosition(0)),
+            new Player("Vlad", createPosition(0))
         ]);
 
     }, [controller]);
 
-    const handler = useCallback(() => {
-        const dice1 = Math.ceil(Math.random() * 6) - 1;
-        const dice2 = Math.ceil(Math.random() * 6) - 1;
-        console.log(dice1 + 1, dice2 + 1)
-
-        controller.rollDices(dice1, dice2);
-
+    const handler = useCallback(async () => {
+        try {
+            const dice1 = Math.ceil(Math.random() * 6) - 1;
+            const dice2 = Math.ceil(Math.random() * 6) - 1;
+            console.log("Dice value", dice1 + 1, dice2 + 1);
+            const newPositionStep = (dice1+1+(controller.getPlayers()[0].position&0x3F))%35;
+            const steps = cellManager.getCellCountForStep(newPositionStep);
+            await controller.rollDices(dice1, dice2);
+            const newPosition = createPosition(newPositionStep, steps == 1 ? 0 : 2);
+            await controller.movePlayer(controller.getPlayers()[0].id, newPosition);
+        }catch (e) {
+            console.error(e);
+        }
     }, [controller]);
 
 

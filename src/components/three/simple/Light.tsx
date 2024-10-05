@@ -5,7 +5,7 @@ function Light({color = 0xffffff, x = 0, y = 600, z = 200}) {
     return (
         <spotLight
             color={color}
-            intensity={2000000}
+            intensity={3000000}
             distance={1000000}
             castShadow
             position={[x, y, z]}
