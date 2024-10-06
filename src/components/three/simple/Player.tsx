@@ -18,7 +18,7 @@ type PLayerComponentProps = {
     onAnimationFinish:(playerId: string) => void
 }
 const Player:React.FC<PLayerComponentProps> = ({playerId, isMoving, path, speed, onAnimationFinish, position})=> {
-    console.log("Player component rendered for player: ", playerId);
+    // console.log("Player component rendered for player: ", playerId);
     //ISSUE: try to reproduce issue (sometimes a player became not visible)
     //ISSUE: try to reproduce issue (sometimes a player can move infinitive on the same position because didn't finish a movement but animation is finished)
     //ISSUE: when user switch to a not game page a player animation became infinitive (the moving end event are not emitted))

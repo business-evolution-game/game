@@ -61,6 +61,12 @@ export class BoardController {
 }
 
 const GameBoard: React.FC = () => {
+    const canvasRef = useRef();
+    useEffect(() => {
+        if (canvasRef.current) {
+            canvasRef.current.setAttribute('data-cy', 'canvas-view');
+        }
+    }, []);
 
     const cellManager = useCellManager();
     const controller = useMemo(() => new BoardController(), [null]);
@@ -102,8 +108,8 @@ const GameBoard: React.FC = () => {
     }, [controller]);
 
 
-    return (<Canvas shadows camera={{position: [0, 600, 400], fov: 45, near: 0.5, far: 10000}}
-                    style={{width: `100vw`, height: `100vh`}}>
+    return (<Canvas ref={canvasRef} shadows camera={{position: [0, 600, 400], fov: 45, near: 0.5, far: 10000}}
+                    style={{width: `100vw`, height: `100vh`}} >
 
         <LoadingManagerProvider>
             <Suspense fallback={<ResourcesLoader/>}>

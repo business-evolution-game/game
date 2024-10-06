@@ -12,7 +12,7 @@ const ResourcesLoader: React.FC = () => {
     const strokeDashoffset = circumference - (progress / 100) * circumference;
 
     return (<Html center style={{width: `700px`, height: `90vh`, overflowY: "scroll"}}>
-        <div className="svg-container">
+        <div className="svg-container" data-cy="resource-loader-view">
             <svg height={radius * 2} width={radius * 2}>
                 <circle
                     stroke="#4b5563"

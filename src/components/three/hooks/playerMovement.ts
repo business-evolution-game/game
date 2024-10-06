@@ -87,8 +87,7 @@ function modifyPlayerPosition(cellMap: Map<number, Cell>, players: Array<Player>
     const playerIndexes = new Map<string, number>();
     players.forEach((player:Player, index) => {
         playerIndexes.set(player.id, index);
-    })
-    console.log(playerIndexes)
+    });
 
     let angle=Math.PI*2;
     let stepAngle = 2/player.length/2;
@@ -102,7 +101,7 @@ function modifyPlayerPosition(cellMap: Map<number, Cell>, players: Array<Player>
         start = -Math.PI/2*(angleIndex+1)+Math.PI*0.1;
     }
     const index = (playerIndexes.get(currentPlayer.id) || 0);
-    console.log(index)
+
     return currentPosition.clone().addScaledVector(new Vector3(
             Math.sin(start+angle+(index/players.length*stepAngle)*Math.PI*2),
             0,
