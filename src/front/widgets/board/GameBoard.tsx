@@ -1,10 +1,10 @@
-import React, {Suspense, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {Suspense, useCallback, useEffect, useMemo, useRef} from 'react';
 import {Canvas} from '@react-three/fiber';
 import {OrbitControls} from '@react-three/drei';
 import {Board} from './Board';
 import Light from "./simple/Light";
 import Player from "../../../model/Player";
-import {createPosition} from "../../../tools";
+import {createPosition} from "@core/tools";
 import {ResourceProvider} from "./general/ResourceManager";
 import {LoadingManagerProvider} from "./general/LoadingManagerContext";
 import ResourcesLoader from "./general/resourcesLoader/ResourcesLoader";
@@ -109,7 +109,7 @@ const GameBoard: React.FC = () => {
 
 
     return (<Canvas ref={canvasRef} shadows camera={{position: [0, 600, 400], fov: 45, near: 0.5, far: 10000}}
-                    style={{width: `100%`, height: `calc(100%-64px)`}} >
+        style={{width: `100%`, height: `calc(100%-64px)`}} >
         <LoadingManagerProvider>
             <Suspense fallback={<ResourcesLoader/>}>
                 <ResourceProvider>

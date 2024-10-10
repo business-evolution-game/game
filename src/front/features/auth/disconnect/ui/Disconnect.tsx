@@ -13,11 +13,11 @@ const Disconnect: React.FC = () => {
     const handleLogout = useCallback(async () => {
         await disconnectAsync();
         dispatch(disconnect());
-    },[]);
+    },[dispatch, disconnectAsync]);
 
     return (<button onClick={handleLogout} className="font-medium">
             Logout
-        </button>
+    </button>
 
     );
 };

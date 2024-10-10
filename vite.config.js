@@ -12,6 +12,7 @@ export default defineConfig({
             { find: '@features', replacement: path.resolve(__dirname, './src/front/features') },
             { find: '@entities', replacement: path.resolve(__dirname, './src/front/entities') },
             { find: '@shared', replacement: path.resolve(__dirname, './src/front/shared') },
+            { find: '@core', replacement: path.resolve(__dirname, './src/core') },
         ],
     },
     css: {

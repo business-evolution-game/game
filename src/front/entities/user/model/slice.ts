@@ -25,13 +25,13 @@ export const authSlice = createSlice({
             state.status = 'disconnected';
         }
     },
-    extraReducers: (builder) => {
-        // builder.addMatcher(connect, (state) => {
-        //     state.status = 'connected'; //todo: what if connecting have been failed
-        // }).addMatcher(disconnect, (state) => {
-        //     state.status = 'disconnected'; //todo: what if connecting have been failed
-        // });
-    },
+    // extraReducers: (builder) => {
+    // builder.addMatcher(connect, (state) => {
+    //     state.status = 'connected'; //todo: what if connecting have been failed
+    // }).addMatcher(disconnect, (state) => {
+    //     state.status = 'disconnected'; //todo: what if connecting have been failed
+    // });
+    // },
 });
 
 

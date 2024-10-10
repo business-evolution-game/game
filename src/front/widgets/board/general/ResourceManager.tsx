@@ -63,6 +63,6 @@ export const ResourceProvider: React.FC<{ children: React.ReactNode }> = ({child
     };
 
     return (<ResourceContext.Provider value={resources}>
-            {children}
-        </ResourceContext.Provider>);
+        {children}
+    </ResourceContext.Provider>);
 };

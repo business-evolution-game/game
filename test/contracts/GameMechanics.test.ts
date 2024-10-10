@@ -5,7 +5,7 @@ import {anyValue} from "@nomicfoundation/hardhat-chai-matchers/withArgs";
 import {testPlayerPermissionForFunction} from "./helpers/permission";
 import GameBuilder from "./helpers/GameBuilder";
 import Game from "./helpers/Game";
-import {createPosition} from "../../src/tools";
+import {createPosition} from "@core/tools/tools";
 
 
 describe("GameMechanics", async function () {

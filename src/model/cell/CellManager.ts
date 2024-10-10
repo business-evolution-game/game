@@ -1,5 +1,5 @@
 import {Vector2} from "three";
-import {createPosition} from "../../tools";
+import {createPosition} from "@core/tools/tools";
 import Cell from "../Cell";
 
 export default class CellManager {
@@ -9,7 +9,7 @@ export default class CellManager {
 
     constructor() {
         this.fillCellMap();
-        this.cells = Array.from(this.cellMap).map(([pos, cell])=>cell);
+        this.cells = Array.from(this.cellMap).map((cm)=>cm[1]);
     }
 
     public getCellCountForStep(step:number):number {

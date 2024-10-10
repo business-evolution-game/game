@@ -8,7 +8,7 @@ interface CellProps {
     cell:Cell
 }
 
-export const CellComponent = forwardRef<THREE.Mesh, CellProps>(({cell}, ref) => {
+export const CellComponent = forwardRef<THREE.Mesh, CellProps>(({cell}) => {
     const mesh = useRef<THREE.Mesh>(null);
     const [hovering, setHovering] = useState(false);
 

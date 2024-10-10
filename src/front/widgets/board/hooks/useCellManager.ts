@@ -1,5 +1,4 @@
-import {useEffect, useMemo} from 'react';
-import { useThree } from '@react-three/fiber';
+import {useMemo} from 'react';
 import CellManager from "../../../../model/cell/CellManager";
 
 export default function useCellManager(){

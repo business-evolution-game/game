@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import {Vector3} from 'three';
 import {useResources} from "../general/ResourceManager";
 import {ReferenceNode} from "three/src/nodes/Nodes";
-import {generateHexColorFromString} from "../../../../tools";
+import {generateHexColorFromString} from "@core/tools/tools";
 
 type PLayerComponentProps = {
     playerId:string,

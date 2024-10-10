@@ -14,7 +14,7 @@ export function usePlayerMovement(controller:BoardController){
         playerId: string,
         path: Vector3[],
         onMovementFinished: () => void,
-    }>>([]);
+            }>>([]);
 
     useEffect(() => {
         return controller.useEvent('movePlayer', (playerId: string, toPosition: number): Promise<void> => new Promise((res) => {
@@ -103,9 +103,9 @@ function modifyPlayerPosition(cellMap: Map<number, Cell>, players: Array<Player>
     const index = (playerIndexes.get(currentPlayer.id) || 0);
 
     return currentPosition.clone().addScaledVector(new Vector3(
-            Math.sin(start+angle+(index/players.length*stepAngle)*Math.PI*2),
-            0,
-            Math.cos(start+angle+(index/players.length*stepAngle)*Math.PI*2)
-        ),
-        radius);
+        Math.sin(start+angle+(index/players.length*stepAngle)*Math.PI*2),
+        0,
+        Math.cos(start+angle+(index/players.length*stepAngle)*Math.PI*2)
+    ),
+    radius);
 }

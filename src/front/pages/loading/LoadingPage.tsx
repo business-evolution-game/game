@@ -23,12 +23,12 @@ function LoadingPage() {
     }, [loading]);
 
     return (<PageTemplate>
-            <div className={"flex justify-center items-center w-full"}>
-                <div className={"mb-40"}>
-                    <LoadingCircle progress={progress}/>
-                </div>
+        <div className={"flex justify-center items-center w-full"}>
+            <div className={"mb-40"}>
+                <LoadingCircle progress={progress}/>
             </div>
-        </PageTemplate>);
+        </div>
+    </PageTemplate>);
 }
 
 export default LoadingPage;

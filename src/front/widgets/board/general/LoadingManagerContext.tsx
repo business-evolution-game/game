@@ -1,5 +1,3 @@
-// LoadingManagerContext.tsx
-
 import React, { createContext, useContext, useEffect, useRef } from 'react';
 import { LoadingManager } from 'three';
 
@@ -62,7 +60,7 @@ export const LoadingManagerProvider: React.FC<{ children: React.ReactNode }> = (
         };
 
         manager.onError = (url) => {
-            console.error(`Error loading ${url}`);
+            setProgressLogs(prev=>[...prev,`Error loading ${url}`]);
         };
     }, [manager, itemsTotal]);
 

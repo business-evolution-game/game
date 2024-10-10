@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import { useThree } from '@react-three/fiber';
+import {PerspectiveCamera, WebGLRenderer} from "three";
 
 const useWindowResize = () => {
-    const { camera, gl } = useThree();
+    const { camera, gl } = useThree<{gl:WebGLRenderer, camera: PerspectiveCamera }>();
 
     useEffect(() => {
         const handleResize = () => {
             const { clientWidth, clientHeight } = gl.domElement;
-            // Update camera aspect ratio and projection matrix
             if (camera.isCamera) {
-                // @ts-ignore
                 camera.aspect = clientWidth / clientHeight;
             }
             camera.updateProjectionMatrix();

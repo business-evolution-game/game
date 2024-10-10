@@ -8,6 +8,7 @@ import {BoardController} from "./GameBoard";
 import {useResources} from "./general/ResourceManager";
 import useCellManager from "./hooks/useCellManager";
 import {usePlayerMovement} from "./hooks/playerMovement";
+import GameNameLabel from "./simple/GameNameLabel";
 
 
 export const Board: React.FC<{ controller: BoardController, onClick: () => void }> = ({controller, onClick}) => {
@@ -49,17 +50,17 @@ export const Board: React.FC<{ controller: BoardController, onClick: () => void 
                 path = pm.path;
             }
             return <PlayerComponent key={player.id}
-                                    isMoving={isMoving}
-                                    playerId={player.id}
-                                    path={path}
-                                    speed={65}
-                                    onAnimationFinish={handleFinishPlayerMovement}
-                                    position={currentPosition}
+                isMoving={isMoving}
+                playerId={player.id}
+                path={path}
+                speed={65}
+                onAnimationFinish={handleFinishPlayerMovement}
+                position={currentPosition}
             />;
         })}
 
         {dices[1] != -1 && <Dice diceRenderIndex={dices[0]} value1={dices[1]} value2={dices[2]} duration={0.5}/>}
-        {/*<GameNameLabel/>*/}
+        <GameNameLabel/>
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -50, 0]} receiveShadow>
             <planeGeometry args={[16600, 14400]}/>
             <meshPhongMaterial color={0x333333}/>

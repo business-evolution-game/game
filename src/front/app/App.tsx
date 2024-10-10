@@ -1,4 +1,4 @@
-import {Routing} from "../pages";
+import {Routing} from "./router/router";
 
 
 function App() {

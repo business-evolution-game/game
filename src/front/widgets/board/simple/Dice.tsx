@@ -32,7 +32,7 @@ export default function Dice({diceRenderIndex, value1, value2, duration}:{diceRe
         }
     ])
     useEffect(() => {
-        setAnimationProps(prev=>[
+        setAnimationProps(()=>[
             {
                 target: {
                     ...animationProps[0].target,

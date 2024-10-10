@@ -4,7 +4,7 @@ import {testPlayerPermissionForFunction} from "./helpers/permission";
 import {expect} from "chai";
 import GameBuilder from "./helpers/GameBuilder";
 import Game from "./helpers/Game";
-import {createPosition} from "../../src/tools";
+import {createPosition} from "@core/tools/tools";
 
 describe("CellManagement", function () {
 

@@ -21,6 +21,7 @@
       "@features/*": ["src/front/features/*"],
       "@entities/*": ["src/front/entities/*"],
       "@shared/*": ["src/front/shared/*"],
+      "@core/*": ["src/core/*"],
     }
   },
   "include": [

@@ -1,4 +1,3 @@
-import {Vector2} from "three";
 
 export default class Player {
 
