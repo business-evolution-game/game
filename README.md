@@ -10,6 +10,13 @@ The game is similar to Monopoly game, but it has multiple changes and absolutely
 
 
 # For developers
+Frontend part implemented based on vite project with using TS, React, tailwind, wagmi stack
+
+For testing using: Cucumber and 'synpress' for e2e testing 
+and hardhat with mocha and chai for unit testing and smart contract testing
+
+## Project structure
+
 
 This project based on Hardhat and a Hardhat Ignition module that deploys that contract.
 

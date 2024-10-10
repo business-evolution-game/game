@@ -8,6 +8,9 @@ node_modules
 /cache
 /artifacts
 
+# cypress
+/cypress
+
 # TypeChain files
 /typechain
 /typechain-types

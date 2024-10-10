@@ -1,0 +1,1 @@
+export {connect, disconnect, authSlice, selectIsAuthenticated} from './model'
