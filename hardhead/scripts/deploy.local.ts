@@ -1,6 +1,8 @@
+// @ts-ignore
 import { ethers } from "hardhat";
 
 async function main() {
+    const shouldWait = process.env.SHOULD_WAIT;
     // Deploy the RollDice contract
     const RollDice = await ethers.getContractFactory("RollDice");
     const rollDice = await RollDice.deploy();
@@ -14,6 +16,12 @@ async function main() {
 
     const mainGameAddress = await mainGame.getAddress();
     console.log("MainGame contract deployed at:", mainGameAddress);
+
+
+    if(shouldWait){
+        console.log("It will be 5 hour live, than please restart");
+        await new Promise((res) => {setTimeout(()=>{res("It's 5 our live, please restart")}, 1000*60*60*5)});
+    }
 }
 
 main()

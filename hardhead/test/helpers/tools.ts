@@ -1,7 +1,7 @@
 import GameBuilder from "./GameBuilder";
 import Game from "./Game";
 import {ethers} from "ethers";
-import {MainGame} from "../../../typechain-types";
+import {MainGame} from "../../typechain-types";
 import {HardhatEthersSigner} from "@nomicfoundation/hardhat-ethers/signers";
 
 export async function newTwoPlayerGameFixture():Promise<{gameContract: MainGame, actors:Array<HardhatEthersSigner>}> {
@@ -15,6 +15,10 @@ export async function notStartedGameFixture():Promise<{gameContract: MainGame, a
     const gh:Game = await new GameBuilder(2)
         .createNewInstance();
     return {gameContract:gh.gameContract, actors:gh.actors};
+}
+
+export function createPosition(step: number, branch: number = 0): number {
+    return (branch << 6) | step;
 }
 
 const matchType: Record<string, (value: any) => any> = {

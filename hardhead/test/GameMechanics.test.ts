@@ -1,11 +1,10 @@
 import {loadFixture} from "@nomicfoundation/hardhat-toolbox/network-helpers";
 import {expect} from "chai";
-import {getGenericValueAssertion, newTwoPlayerGameFixture} from "./helpers/tools";
+import {createPosition, getGenericValueAssertion, newTwoPlayerGameFixture} from "./helpers/tools";
 import {anyValue} from "@nomicfoundation/hardhat-chai-matchers/withArgs";
 import {testPlayerPermissionForFunction} from "./helpers/permission";
 import GameBuilder from "./helpers/GameBuilder";
 import Game from "./helpers/Game";
-import {createPosition} from "@core/tools/tools";
 
 
 describe("GameMechanics", async function () {
