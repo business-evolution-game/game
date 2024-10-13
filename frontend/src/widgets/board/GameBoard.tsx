@@ -3,7 +3,7 @@ import {Canvas} from '@react-three/fiber';
 import {OrbitControls} from '@react-three/drei';
 import {Board} from './Board';
 import Light from "./simple/Light";
-import Player from "../../../model/Player";
+import {Player} from "@entities/player";
 import {createPosition} from "@core/tools";
 import {ResourceProvider} from "./general/ResourceManager";
 import {LoadingManagerProvider} from "./general/LoadingManagerContext";
@@ -61,7 +61,7 @@ export class BoardController {
 }
 
 const GameBoard: React.FC = () => {
-    const canvasRef = useRef();
+    const canvasRef = useRef<RefObject<HTMLCanvasElement>>();
     useEffect(() => {
         if (canvasRef.current) {
             canvasRef.current.setAttribute('data-cy', 'canvas-view');

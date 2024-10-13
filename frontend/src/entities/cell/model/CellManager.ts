@@ -1,6 +1,6 @@
 import {Vector2} from "three";
-import {createPosition} from "@core/tools/tools";
-import Cell from "../Cell";
+import {createPosition} from "@core/tools";
+import Cell from "./Cell";
 
 export default class CellManager {
 

@@ -1,5 +1,5 @@
 import {useMemo} from 'react';
-import CellManager from "../../../../model/cell/CellManager";
+import {CellManager} from "@entities/cell";
 
 export default function useCellManager(){
     return  useMemo(() => new CellManager(), []);

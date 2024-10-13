@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "target": "es2020",
+    "module": "esnext",
+    "jsx": "react-jsx",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "@pages/*": ["src/pages/*"],
+      "@widgets/*": ["src/widgets/*"],
+      "@features/*": ["src/features/*"],
+      "@entities/*": ["src/entities/*"],
+      "@shared/*": ["src/shared/*"],
+      "@core/*": ["../core/*"]
+    },
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "test/**/*.ts",
+    "src/**/*.ts",
+    "node_modules/preact/src/internal.d.ts"
+  ]
+}
