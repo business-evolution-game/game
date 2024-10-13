@@ -1,9 +1,10 @@
 import {loadFixture} from "@nomicfoundation/hardhat-toolbox/network-helpers";
 import {newTwoPlayerGameFixture, notStartedGameFixture} from "./tools";
 import {expect} from "chai";
+import {MainGame} from "../../typechain-types";
 
-export function testPlayerPermissionForFunction(stack:string|undefined, functionName:string, ...args) {
-    describe(`Check permission for function: ${functionName}`,async  ()=>{
+export function testPlayerPermissionForFunction(stack:string="", functionName:keyof MainGame, ...args:any[]) {
+    describe(`Check permission for function: ${String(functionName)}`,async  ()=>{
         afterEach(function () {
             if (this.currentTest?.state === 'failed') {
                 console.error([`Permission test was failed`, ...stack?.split('\n').slice(1, 5)].join('\n'));
@@ -24,7 +25,7 @@ export function testPlayerPermissionForFunction(stack:string|undefined, function
                 .revertedWith("Only a registered player can execute this function.");
         });
 
-        it(`Should revert the call for not current player for function: ${functionName}`, async function () {
+        it(`Should revert the call for not current player for function: ${String(functionName)}`, async function () {
             let {gameContract, actors} = await loadFixture(newTwoPlayerGameFixture);
             gameContract = await gameContract.connect(actors[1]);
 

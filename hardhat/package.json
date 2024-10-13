@@ -1,5 +1,5 @@
 {
-  "name": "business-evolution",
+  "name": "@business-evolution/contracts",
   "version": "1.0.0",
   "description": "",
   "modules": true,
@@ -8,7 +8,7 @@
     "test": "npx hardhat test $(find test -name \"*.test.ts\")",
     "compile": "npx hardhat compile",
     "deploy:local": "start-test dev http://localhost:8545 'SHOULD_WAIT=true npx hardhat run scripts/deploy.local.ts --network localhost'",
-    "coverage": "npx hardhat coverage"
+    "coverage": "npx hardhat coverage --testfiles \"./test/**/*.test.ts\"\n"
   },
   "keywords": [],
   "author": "",
@@ -33,6 +33,7 @@
     "solidity-coverage": "^0.8.13",
     "ts-mocha": "^10.0.0",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typechain": "^8.3.2",
     "typescript": "^5.5.4"
   }

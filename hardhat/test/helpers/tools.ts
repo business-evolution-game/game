@@ -17,9 +17,6 @@ export async function notStartedGameFixture():Promise<{gameContract: MainGame, a
     return {gameContract:gh.gameContract, actors:gh.actors};
 }
 
-export function createPosition(step: number, branch: number = 0): number {
-    return (branch << 6) | step;
-}
 
 const matchType: Record<string, (value: any) => any> = {
     uint:BigInt,

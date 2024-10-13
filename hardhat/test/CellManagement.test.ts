@@ -1,9 +1,10 @@
 import {loadFixture} from "@nomicfoundation/hardhat-toolbox/network-helpers";
-import {createPosition, newTwoPlayerGameFixture} from "./helpers/tools";
+import {newTwoPlayerGameFixture} from "./helpers/tools";
 import {testPlayerPermissionForFunction} from "./helpers/permission";
 import {expect} from "chai";
 import GameBuilder from "./helpers/GameBuilder";
 import Game from "./helpers/Game";
+import {createPosition} from "@business-evolution/core/tools";
 
 describe("CellManagement", function () {
 
@@ -18,7 +19,7 @@ describe("CellManagement", function () {
                     price: v[2],
                     rent: v[3]
                 }))
-                .filter(v => v.branch == 1 && v.type == 1);
+                .filter(v => v.branch == 1 && Number(v.type) == 1);
 
             console.log("Cells array:", cells);
             //TODO: implement the board structure check

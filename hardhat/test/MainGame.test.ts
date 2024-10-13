@@ -1,7 +1,6 @@
 import {loadFixture} from "@nomicfoundation/hardhat-toolbox/network-helpers";
 import {expect} from "chai";
 import {describe} from "mocha";
-import {MainGame} from "../typechain-types";
 import {newTwoPlayerGameFixture, notStartedGameFixture} from "./helpers/tools";
 
 describe("MainGame", function () {

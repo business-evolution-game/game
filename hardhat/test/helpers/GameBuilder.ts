@@ -62,10 +62,10 @@ export default class GameBuilder {
     public async createNewInstance():Promise<Game>{
         const actors = await hre.ethers.getSigners();
         const RollDice = await hre.ethers.getContractFactory("RollDiceMock");
-        const rollDice = (await RollDice.deploy(2)) as RollDiceMock;
+        const rollDice = (await RollDice.deploy(2)) as unknown as RollDiceMock;
 
         const MainGame = await hre.ethers.getContractFactory("MainGame");
-        let game:MainGame = (await MainGame.deploy(rollDice, this.playerCount)) as MainGame;
+        let game:MainGame = (await MainGame.deploy(rollDice, this.playerCount)) as unknown as MainGame;
 
         let currentStage = new Game(game, rollDice, actors);
         for(const action of this.actions) {
