@@ -1,25 +1,8 @@
 node_modules
-.env
 
 #IDE
 .idea
 
-
-# cypress
-/cypress
-
-# TypeChain files
-/typechain
-/typechain-types
-
-# solidity-coverage files
-/coverage
-/coverage.json
-
 # Frontend build
 /dist
 
-# Hardhat Ignition default folder for deployments against a local node
-ignition/deployments/chain-31337
-
-/.vite

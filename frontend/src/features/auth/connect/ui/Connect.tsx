@@ -18,6 +18,7 @@ const Connect: React.FC = () => {
     return (<>
         <h2>Connect with: </h2>
         {connectors.map((connector) => (<button
+            data-cy="connect-btn"
             className="p-1 hover:text-red-600 font-medium"
             key={connector.uid}
             onClick={() => handleLogin(connector)}

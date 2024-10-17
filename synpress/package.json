@@ -1,0 +1,20 @@
+{
+  "name": "@business-evolution/synpress",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "npx synpress run --configFile 'cypress.config.ts' --headless",
+    "test:open": "npx synpress run --configFile 'cypress.config.ts' -ne"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@synthetixio/synpress": "^3.7.3",
+    "@types/chai": "^5.0.0",
+    "@types/mocha": "^10.0.9",
+    "@types/node": "^22.7.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
