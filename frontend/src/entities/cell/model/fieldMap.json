@@ -1,0 +1,541 @@
+[
+  {
+    "position": 0,
+    "boardPosition": {
+      "x": -330,
+      "y": -220
+    },
+    "name": "Start"
+  },
+  {
+    "position": 1,
+    "boardPosition": {
+      "x": -250,
+      "y": -153
+    },
+    "name": "",
+    "imageUrl": "/img/board/trak 1.png"
+  },
+  {
+    "position": 66,
+    "boardPosition": {
+      "x": -193,
+      "y": -191.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 130,
+    "boardPosition": {
+      "x": -193,
+      "y": -124.5
+    },
+    "name": "",
+    "imageUrl": "/img/board/airplane.png"
+  },
+  {
+    "position": 194,
+    "boardPosition": {
+      "x": -193,
+      "y": -57.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 67,
+    "boardPosition": {
+      "x": -138,
+      "y": -191.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 131,
+    "boardPosition": {
+      "x": -138,
+      "y": -124.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 195,
+    "boardPosition": {
+      "x": -138,
+      "y": -57.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 68,
+    "boardPosition": {
+      "x": -83,
+      "y": -191.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 132,
+    "boardPosition": {
+      "x": -83,
+      "y": -124.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 196,
+    "boardPosition": {
+      "x": -83,
+      "y": -57.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 5,
+    "boardPosition": {
+      "x": -28,
+      "y": -95
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 6,
+    "boardPosition": {
+      "x": 27,
+      "y": -95
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 71,
+    "boardPosition": {
+      "x": 82,
+      "y": -191.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 135,
+    "boardPosition": {
+      "x": 82,
+      "y": -124.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 199,
+    "boardPosition": {
+      "x": 82,
+      "y": -57.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 72,
+    "boardPosition": {
+      "x": 137,
+      "y": -191.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 136,
+    "boardPosition": {
+      "x": 137,
+      "y": -124.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 200,
+    "boardPosition": {
+      "x": 137,
+      "y": -57.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 73,
+    "boardPosition": {
+      "x": 192,
+      "y": -191.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 137,
+    "boardPosition": {
+      "x": 192,
+      "y": -124.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 201,
+    "boardPosition": {
+      "x": 192,
+      "y": -57.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 10,
+    "boardPosition": {
+      "x": 249,
+      "y": -153
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 75,
+    "boardPosition": {
+      "x": 330,
+      "y": -220
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 139,
+    "boardPosition": {
+      "x": 293,
+      "y": -99
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 12,
+    "boardPosition": {
+      "x": 293,
+      "y": -29
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 13,
+    "boardPosition": {
+      "x": 238,
+      "y": -29
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 14,
+    "boardPosition": {
+      "x": 238,
+      "y": 27
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 15,
+    "boardPosition": {
+      "x": 293,
+      "y": 27
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 16,
+    "boardPosition": {
+      "x": 293,
+      "y": 97
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 17,
+    "boardPosition": {
+      "x": 330,
+      "y": 220
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 18,
+    "boardPosition": {
+      "x": 249,
+      "y": 149
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 83,
+    "boardPosition": {
+      "x": 192,
+      "y": 53.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 147,
+    "boardPosition": {
+      "x": 192,
+      "y": 120.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 211,
+    "boardPosition": {
+      "x": 192,
+      "y": 187.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 84,
+    "boardPosition": {
+      "x": 137,
+      "y": 53.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 148,
+    "boardPosition": {
+      "x": 137,
+      "y": 120.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 212,
+    "boardPosition": {
+      "x": 137,
+      "y": 187.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 85,
+    "boardPosition": {
+      "x": 82,
+      "y": 53.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 149,
+    "boardPosition": {
+      "x": 82,
+      "y": 120.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 213,
+    "boardPosition": {
+      "x": 82,
+      "y": 187.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 22,
+    "boardPosition": {
+      "x": 27,
+      "y": 92
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 23,
+    "boardPosition": {
+      "x": -27,
+      "y": 91
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 88,
+    "boardPosition": {
+      "x": -193,
+      "y": 53.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 152,
+    "boardPosition": {
+      "x": -193,
+      "y": 120.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 216,
+    "boardPosition": {
+      "x": -193,
+      "y": 187.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 89,
+    "boardPosition": {
+      "x": -138,
+      "y": 53.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 153,
+    "boardPosition": {
+      "x": -138,
+      "y": 120.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 217,
+    "boardPosition": {
+      "x": -138,
+      "y": 187.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 90,
+    "boardPosition": {
+      "x": -83,
+      "y": 53.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 154,
+    "boardPosition": {
+      "x": -83,
+      "y": 120.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 218,
+    "boardPosition": {
+      "x": -83,
+      "y": 187.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 27,
+    "boardPosition": {
+      "x": -250,
+      "y": 148
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 28,
+    "boardPosition": {
+      "x": -330,
+      "y": 220
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 29,
+    "boardPosition": {
+      "x": -294,
+      "y": 97
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 30,
+    "boardPosition": {
+      "x": -294,
+      "y": 27.5
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 31,
+    "boardPosition": {
+      "x": -239,
+      "y": 27
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 32,
+    "boardPosition": {
+      "x": -239.5,
+      "y": -29
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 33,
+    "boardPosition": {
+      "x": -294.5,
+      "y": -29
+    },
+    "name": "",
+    "imageUrl": ""
+  },
+  {
+    "position": 34,
+    "boardPosition": {
+      "x": -294.5,
+      "y": -99
+    },
+    "name": "",
+    "imageUrl": ""
+  }
+]

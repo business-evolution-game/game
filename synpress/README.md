@@ -7,7 +7,7 @@ npm start
 # Wait until the server start (do not close it while testing)
 
 cd ../hardhat
-npm run dev
+npm run start
 # Wait until the node start (do not close it while testing)
 
 cd ../synpress 

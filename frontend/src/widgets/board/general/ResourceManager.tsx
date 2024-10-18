@@ -6,10 +6,12 @@ import {GLTF, GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
 import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader';
 import {Font, FontLoader} from 'three/examples/jsm/loaders/FontLoader';
 import {useLoadingManager} from './LoadingManagerContext';
+import useCellManager from "@widgets/board/hooks/useCellManager";
 
 type ResourceContextType = {
     textures: {
         board: Texture;
+        cells:{[key:string]:Texture}
     }; models: {
         dice: GLTF;
         player: GLTF ;
@@ -27,6 +29,7 @@ export const useResources = () => {
 };
 
 export const ResourceProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
+    const cellManager = useCellManager();
     const {manager} = useLoadingManager();
 
     const dracoLoader = new DRACOLoader(manager);
@@ -48,6 +51,15 @@ export const ResourceProvider: React.FC<{ children: React.ReactNode }> = ({child
         loader.manager = manager;
     });
 
+    const cells:{[key:string]:Texture} = {};
+    for(let cell of cellManager.getCellArray()){
+        if(cell.imageUrl=="") continue;
+        cells[cell.imageUrl] = useLoader(TextureLoader, cell.imageUrl, (loader) => {
+            loader.manager = manager;
+        });
+    }
+    console.log(cells);
+
     const font = useLoader(FontLoader, '/fonts/RubikGlitchRegular.json', (loader) => {
         loader.manager = manager;
     });
@@ -55,6 +67,7 @@ export const ResourceProvider: React.FC<{ children: React.ReactNode }> = ({child
     const resources: ResourceContextType = {
         textures: {
             board,
+            cells
         }, models: {
             dice, player,
         }, fonts: {

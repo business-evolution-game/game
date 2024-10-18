@@ -12,7 +12,7 @@ export const Routing = () => {
             <Routes>
                 <Route path="/" element={<LoadingPage/>}/>
                 <Route path="/board" element={<GamePage/>}/>
-                <Route path="*" element={<Page404/>}/>
+                {/*<Route path="*" element={<Page404/>}/>*/}
             </Routes>
         </Suspense>
     </BrowserRouter>);
