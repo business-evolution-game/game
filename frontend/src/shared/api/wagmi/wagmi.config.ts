@@ -1,5 +1,6 @@
 import {http, createConfig} from 'wagmi';
-import {sepolia} from 'wagmi/chains';
+import {sepolia, hardhat} from 'wagmi/chains';
+import {getPublicClient} from "@wagmi/core";
 import {mock} from "@wagmi/connectors";
 
 export const connectors = [
@@ -14,9 +15,12 @@ export const connectors = [
 ];
 
 export const config = createConfig({
-    chains: [sepolia],
+    chains: [sepolia, hardhat],
     transports: {
         [sepolia.id]: http(),
+        [hardhat.id]: http(),
     },
     connectors,
 });
+
+export const publicClient = getPublicClient(config);

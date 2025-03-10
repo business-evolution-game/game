@@ -22,11 +22,9 @@ const Header: React.FC = () => {
 
                     <div className="flex md:space-x-8 items-stretch">
                         <Link to="/"
-                            className="content-center text-gray-900 hover:text-indigo-600 font-medium">Web2 </Link>
+                            className="content-center text-gray-900 hover:text-indigo-600 font-medium">Home </Link>
                         {account.status === 'connected' && (
                             <>
-                                <Link to="/web3"
-                                    className="text-gray-900 hover:text-indigo-600 font-medium content-center">Web3</Link>
                                 <Link to="/Board"
                                     className="text-gray-900 hover:text-indigo-600 font-medium content-center">Board</Link>
                             </>

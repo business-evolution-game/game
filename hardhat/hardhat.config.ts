@@ -1,5 +1,6 @@
 import {HardhatUserConfig} from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import "@nomicfoundation/hardhat-ignition";
 import 'solidity-coverage';
 
 const config: HardhatUserConfig = {
@@ -8,9 +9,12 @@ const config: HardhatUserConfig = {
     paths: {
         sources: 'src',
         tests:'test'
-    }, networks: {
+    },
+    networks: {
         localhost: {
             url: "http://127.0.0.1:8545",
+            chainId: 31337,
+            loggingEnabled: true,
         },
     },
     mocha: {

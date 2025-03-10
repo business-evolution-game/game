@@ -1,17 +1,13 @@
-import '@shared/ui/base.css';
-
-// import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import React from 'react';
 import {createRoot} from 'react-dom/client';
-
 import {Provider as ReduxProvider} from 'react-redux';
 import {WagmiProvider} from 'wagmi';
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import '@shared/ui/base.css';
+import {config} from '@shared/api/wagmi';
 
 import App from "./App";
 import {store} from './store';
-
-import {config} from './wagmi.config'
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 const queryClient = new QueryClient()
 

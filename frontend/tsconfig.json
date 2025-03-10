@@ -15,7 +15,8 @@
       "@features/*": ["src/features/*"],
       "@entities/*": ["src/entities/*"],
       "@shared/*": ["src/shared/*"],
-      "@core/*": ["../core/*"]
+      "@core/*": ["../core/*"],
+      "@contracts/*": ["../hardhat/artifacts/*"],
     },
     "allowSyntheticDefaultImports": true
   },

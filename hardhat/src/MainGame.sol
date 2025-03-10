@@ -6,6 +6,7 @@ import "./GameMechanics.sol";
 import "hardhat/console.sol";
 
 contract MainGame is GameMechanics{
+    error DoubleJoiningError();
 
     uint8 public playerCount;
 
@@ -17,7 +18,9 @@ contract MainGame is GameMechanics{
 
     function join() external{
         require(status==GameStatus.REGISTRATION, "The game is already started.");
-        require(players[msg.sender].addr == address(0), "You are already joined");
+        if(players[msg.sender].addr != address(0)){
+            revert DoubleJoiningError();
+        }
 
         addPlayer();
         if(playerAddresses.length==playerCount){

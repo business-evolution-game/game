@@ -13,6 +13,7 @@ export default defineConfig({
             { find: '@entities', replacement: path.resolve(__dirname, './src/entities') },
             { find: '@shared', replacement: path.resolve(__dirname, './src/shared') },
             { find: '@core', replacement: path.resolve(__dirname, '../core') },
+            { find: '@contracts', replacement: path.resolve(__dirname, '../hardhat/artifacts') },
         ],
     },
     build: {

@@ -16,7 +16,7 @@ This repo is structured as monorepo that contain these parts:
 
 - <b>./core</b> - here is a code that might be used in another subprojects 
 
-- <b>./frontend</b> - here is a code that responsible for the Frontend. 
+- <b>./frontend</b> - here is a code that responsible for the Frontend. [more](./frontend/README.md)
     
   It's implemented based on vite project with using TS, React, tailwind, wagmi and Three.js stack
 
